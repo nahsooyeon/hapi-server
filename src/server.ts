@@ -1,7 +1,12 @@
 import Hapi from "@hapi/hapi";
-import { Server } from "@hapi/hapi";
+import { Server, Request } from "@hapi/hapi";
 
 export let server: Server;
+
+const index = (request: Request): string => {
+  console.log("Request processing", request.info.id);
+  return "Hello! Hapi Server Welcomes you.";
+};
 
 export const init = async function (): Promise<Server> {
   server = Hapi.server({
@@ -10,6 +15,8 @@ export const init = async function (): Promise<Server> {
   });
 
   /* 라우팅 부분 작성 */
+
+  server.route({ method: "GET", path: "/", handler: index });
 
   return server;
 };
