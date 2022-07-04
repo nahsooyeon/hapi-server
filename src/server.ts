@@ -1,5 +1,6 @@
 import Hapi from "@hapi/hapi";
 import { Server, Request } from "@hapi/hapi";
+import { helloRoutes } from "./hello";
 
 export let server: Server;
 
@@ -17,6 +18,7 @@ export const init = async function (): Promise<Server> {
   /* 라우팅 부분 작성 */
 
   server.route({ method: "GET", path: "/", handler: index });
+  server.route(helloRoutes);
 
   return server;
 };
